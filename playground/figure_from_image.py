@@ -10,23 +10,43 @@ from skimage.restoration import denoise_tv_chambolle, estimate_sigma
 import matplotlib.pyplot as plt
 
 
-def figure_from_image(image_file):
+def figure_from_image(image_filename):
+    raw_image = io.imread(image_filename)
+
+    if raw_image.shape[0] == 4:
+        rgb_image = color.rgba2rgb(raw_image)
+        gray_image = color.rgb2gray(rgb_image)
+    elif raw_image.shape[0] == 3:
+        rgb_image = raw_image
+        gray_image = color.rgb2gray(rgb_image)
+    else:
+        gray_image = raw_image
+
+    sig_est = estimate_sigma(gray_image)
+    print(f'Estimated sigma of {image_filename} = {sig_est}')
+
+    denoise = denoise_tv_chambolle(gray_image, weight=0.2)
+    sig_est_denoise = estimate_sigma(denoise)
+    print(f'Estimated sigma after denoise = {sig_est_denoise}')
+
+    return denoise
+
+
+def compare_images(image1, image2):
     pass
 
 
 if __name__ == '__main__':
-    in_filename = 'Subject.png'
+    exp_filename = 'Subject.png'
+    th_filename = 'LineCountour.png'
 
-    raw_image = io.imread(in_filename)
-    rgb_image = color.rgba2rgb(raw_image)
-    gray_image = color.rgb2gray(rgb_image)
+    exp = figure_from_image(exp_filename)
+    theo = figure_from_image(th_filename)
 
-    canny_test = feature.canny(gray_image, sigma=3)
+    fig = plt.figure(0)
+    plt.imshow(exp)
 
-    sig_est = estimate_sigma(canny_test)
-    print(sig_est)
+    fig = plt.figure(1)
+    plt.imshow(theo)
 
-    denoise1 = denoise_tv_chambolle(canny_test, weight=0.1)
-    fig = plt.figure()
-    plt.imshow(denoise1, cmap="gray")
     plt.show()

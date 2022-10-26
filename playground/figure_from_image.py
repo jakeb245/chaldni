@@ -3,9 +3,7 @@ Get figure from image???
 """
 
 from skimage import io
-from skimage import feature
 from skimage import color
-from skimage import measure
 from skimage.restoration import denoise_tv_chambolle, estimate_sigma
 import matplotlib.pyplot as plt
 
@@ -19,6 +17,7 @@ def figure_from_image(image_filename):
     elif raw_image.shape[0] == 3:
         rgb_image = raw_image
         gray_image = color.rgb2gray(rgb_image)
+        # TODO: invert colors on theoretical figure
     else:
         gray_image = raw_image
 
@@ -30,6 +29,10 @@ def figure_from_image(image_filename):
     print(f'Estimated sigma after denoise = {sig_est_denoise}')
 
     return denoise
+
+
+def scale_image(image1, image2):
+    pass
 
 
 def compare_images(image1, image2):

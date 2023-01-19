@@ -8,3 +8,5 @@ Maybe (probably):
 
 1. Implement "error bars"?
 2. Fix model...
+
+SPECIAL NOTE: Buy FLAT white paper to plate plate on so the code can find the contours.

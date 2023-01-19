@@ -5,14 +5,17 @@ image and scale it as necessary. Finally, it should convert the
 image to binary format
 """
 
-from skimage import io
+from skimage import io, feature, color
 import matplotlib.pyplot as plt
-
-
-def isolate_plate(image):
-    pass
+import cv2 as cv
 
 
 if __name__ == '__main__':
     fname = "real_test.jpeg"
-    raw_image = io.imread(fname)
+    im = cv.imread(fname)
+    imgray = cv.cvtColor(im, cv.COLOR_BGR2GRAY)
+    ret, thresh = cv.threshold(imgray, 127, 255, 0)
+    contours, hierarchy = cv.findContours(thresh, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
+    cv.drawContours(im, contours, -1, (0, 255, 0), 3)
+    plt.imshow(im, cmap='gray')
+    plt.show()

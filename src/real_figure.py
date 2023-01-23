@@ -28,11 +28,13 @@ def find_center(image, c):
     return (cX, cY)
 
 
-def get_angle(image, c):
-    M = cv.moments(c)
-    angle = (M["m10"] - M["m00"]) / (M["m01"] - M["m00"])
-    print(angle)
-
+def get_angle(image):
+    imgray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
+    imgray = np.float32(imgray)
+    dst = cv.cornerHarris(imgray, 2, 3, 0.04)
+    dst = cv.dilate(dst, None)
+    image[dst > 0.05 * dst.max()] = [0, 0, 255]
+    cv.imshow('dst', image)
 
 
 if __name__ == '__main__':
@@ -40,9 +42,9 @@ if __name__ == '__main__':
     im = cv.imread(fname)
     contours1 = get_contours(im)
     cent = find_center(im, contours1[1])
-    get_angle(im, contours1[1])
+    get_angle(im)
     im_rot = rotate_image(im, cent, 69)
     contours2 = get_contours(im_rot)
-    get_angle(im_rot, contours2[1])
+    get_angle(im_rot)
     plt.imshow(im_rot, cmap='gray')
     plt.show()

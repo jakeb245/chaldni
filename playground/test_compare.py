@@ -71,4 +71,5 @@ if __name__ == '__main__':
     plt.rcParams['figure.facecolor'] = 'black'
     plt.imshow(exp_test + theo_test)
     plt.axis('off')
-    plt.savefig('AddedFigures.png',bbox_inches='tight', pad_inches=0)
+    #plt.savefig('AddedFigures.png',bbox_inches='tight', pad_inches=0)
+    plt.show()

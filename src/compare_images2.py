@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 if __name__ == '__main__':
     theo = "/Users/jakebuchanan/code/chladni/ReverseFit/images/Freq965C212926.PNG"
-    real = "RealProto.png"
+    real = "figure965.png"
 
     print(compare_images(real, theo))
 

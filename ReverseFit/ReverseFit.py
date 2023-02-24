@@ -27,6 +27,10 @@ def get_model(img_dir, freq_list):
     return images
 
 
+def get_data(img_dir):
+    images = {}
+
+
 def fit(freq_list, images, exp_fname):
     lowest_c = []
     for freq in freq_list:
@@ -51,8 +55,7 @@ def fit(freq_list, images, exp_fname):
 
 
 if __name__ == '__main__':
-    freq_list = [965]
-    real_fname = "/Users/jakebuchanan/code/chladni/src/RealProto.png"
+    freq_list = [965, 5365]
     dir = "/Users/jakebuchanan/code/chladni/ReverseFit/images"
     img_list = get_model(dir, freq_list)
     fit(freq_list, img_list, real_fname)

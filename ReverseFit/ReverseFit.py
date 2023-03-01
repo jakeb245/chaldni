@@ -2,7 +2,7 @@
 Reverse fit C constant
 """
 import matplotlib.pyplot as plt
-from src.compare import compare_images, add_figures
+from src.compare import compare_images, read_image
 import os
 import statistics
 from skimage.restoration import denoise_tv_chambolle
@@ -43,10 +43,10 @@ def get_data(img_dir):
 def fit(freq, images, exp_fname):
     lowest_error = 1.0
     lowest_c = None
+    exp_img = read_image(exp_fname, denoise=True)
     for img in images:
-        img_denoised = denoise_tv_chambolle(img, weight=0.2, channel_axis=-1)
         if images[img][0] == freq:
-            error = compare_images(exp_fname, img_denoised, denoise=False)
+            error = compare_images(exp_fname, img, exp_img, denoise=False)
             c = images[img][1]
             if error < lowest_error:
                 lowest_error = error

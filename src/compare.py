@@ -22,8 +22,11 @@ def read_image(filename, denoise=False):
     return bool_array * 1
 
 
-def compare_images(exp_filename, theo_filename, denoise=True):
-    exp = read_image(exp_filename, denoise=denoise)
+def compare_images(exp_filename, theo_filename, exp_image=None, denoise=True):
+    if exp_image is not None:
+        exp = exp_image
+    else:
+        exp = read_image(exp_filename, denoise=denoise)
     theo = read_image(theo_filename)
 
     error = mean_squared_error(exp, theo)

@@ -6,7 +6,8 @@ import matplotlib.pyplot as plt
 from src.compare import compare_images, read_image
 import os
 import statistics
-from skimage.restoration import denoise_tv_chambolle
+import numpy as np
+import csv
 
 
 def get_model(img_dir, freq_list):
@@ -61,17 +62,31 @@ def fit(freq, images, exp_fname):
 if __name__ == '__main__':
     theo_dir = "/Users/jakebuchanan/code/chladni/ReverseFit/images"
     data_dir = "/Users/jakebuchanan/code/chladni/data"
+    outfile = "/Users/jakebuchanan/code/chladni/ReverseFit/output.csv"
 
     exp_images, freq_list = get_data(data_dir)
     img_list = get_model(theo_dir, freq_list)
 
-    c_each = []
-    for exp in exp_images:
-        c = fit(exp_images[exp], img_list, os.path.join(data_dir, exp))
-        c_each.append(c)
-        print(f"For image {exp}: c = {c}")
+    with open(outfile, 'w') as file:
+        writer = csv.writer(file)
+        header = ['Frequency', 'C']
+        writer.writerow(header)
+
+        c_each = []
+        for exp in exp_images:
+            exp_name = exp.split('_')
+            freq = exp_name[1][0:-4]
+            c = fit(exp_images[exp], img_list, os.path.join(data_dir, exp))
+            c_each.append(c)
+            print(f"For image {exp}: c = {c}")
+            writer.writerow([freq, c])
 
     mean = statistics.mean(c_each)
     dev = statistics.stdev(c_each)
 
-    print(f"C = {mean} +/- {dev}")
+    fig = plt.figure()
+    plt.plot(freq_list, c_each, '.')
+    plt.plot(freq_list, np.zeros(len(freq_list))+mean)
+    plt.plot(freq_list, np.zeros(len(freq_list))+mean+dev, '-')
+    plt.plot(freq_list, np.zeros(len(freq_list))+mean-dev, '-')
+    plt.show()

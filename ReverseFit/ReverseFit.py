@@ -1,6 +1,7 @@
 """
 Reverse fit C constant
 """
+
 import matplotlib.pyplot as plt
 from src.compare import compare_images, read_image
 import os
@@ -64,8 +65,13 @@ if __name__ == '__main__':
     exp_images, freq_list = get_data(data_dir)
     img_list = get_model(theo_dir, freq_list)
 
-    c = []
+    c_each = []
     for exp in exp_images:
-        c.append(fit(exp_images[exp], img_list, os.path.join(data_dir, exp)))
+        c = fit(exp_images[exp], img_list, os.path.join(data_dir, exp))
+        c_each.append(c)
+        print(f"For image {exp}: c = {c}")
 
-    print(c)
+    mean = statistics.mean(c_each)
+    dev = statistics.stdev(c_each)
+
+    print(f"C = {mean} +/- {dev}")

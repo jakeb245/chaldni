@@ -86,7 +86,7 @@ if __name__ == '__main__':
 
     fig = plt.figure()
     plt.plot(freq_list, c_each, '.')
-    plt.plot(freq_list, np.zeros(len(freq_list))+mean)
-    plt.plot(freq_list, np.zeros(len(freq_list))+mean+dev, linestyle='dotted')
-    plt.plot(freq_list, np.zeros(len(freq_list))+mean-dev, '-')
+    plt.plot(freq_list, np.zeros(len(freq_list))+mean, color='blue')
+    plt.plot(freq_list, np.zeros(len(freq_list))+mean+dev, color='blue', linestyle='dotted')
+    plt.plot(freq_list, np.zeros(len(freq_list))+mean-dev, color='blue', linestyle='dotted')
     plt.show()

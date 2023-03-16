@@ -89,4 +89,7 @@ if __name__ == '__main__':
     plt.plot(freq_list, np.zeros(len(freq_list))+mean, color='blue')
     plt.plot(freq_list, np.zeros(len(freq_list))+mean+dev, color='blue', linestyle='dotted')
     plt.plot(freq_list, np.zeros(len(freq_list))+mean-dev, color='blue', linestyle='dotted')
-    plt.show()
+    plt.title('C constant vs. Frequency')
+    plt.ylabel('C constant')
+    plt.xlabel('Frequency')
+    plt.savefig('/Users/jakebuchanan/code/chladni/ReverseFit/update_output.png', dpi=300)

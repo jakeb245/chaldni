@@ -92,4 +92,4 @@ if __name__ == '__main__':
     plt.title('C constant vs. Frequency')
     plt.ylabel('C constant')
     plt.xlabel('Frequency')
-    plt.savefig('/Users/jakebuchanan/code/chladni/ReverseFit/update_output.png', dpi=300)
+    plt.savefig('/Users/jakebuchanan/code/chladni/ReverseFit/output.png', dpi=300)

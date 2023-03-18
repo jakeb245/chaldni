@@ -87,14 +87,13 @@ if __name__ == '__main__':
         writer.writerow(['Mean', 'Dev'])
         writer.writerow([mean, dev])
 
+    freq_list = [float(s) for s in freq_list]
     fig = plt.figure()
     plt.plot(freq_list, c_each, '.')
-    plt.plot(freq_list, np.zeros(len(freq_list))+mean, color='blue')
-    plt.plot(freq_list, np.zeros(len(freq_list))+mean+dev, color='blue', linestyle='dotted')
-    plt.plot(freq_list, np.zeros(len(freq_list))+mean-dev, color='blue', linestyle='dotted')
+    plt.plot(freq_list, np.zeros(len(freq_list)) + mean, color='blue')
+    plt.plot(freq_list, np.zeros(len(freq_list)) + mean + dev, color='blue', linestyle='dotted')
+    plt.plot(freq_list, np.zeros(len(freq_list)) + mean - dev, color='blue', linestyle='dotted')
     plt.title('C constant vs. Frequency')
     plt.ylabel('C constant')
     plt.xlabel('Frequency')
-    ticks = [freq_list[f] for f in range(len(freq_list)) if f % 2 == 0]
-    plt.xticks(ticks)
     plt.savefig('/Users/jakebuchanan/code/chladni/ReverseFit/output.png', dpi=300)

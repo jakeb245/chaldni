@@ -81,8 +81,11 @@ if __name__ == '__main__':
             print(f"For image {exp}: c = {c}")
             writer.writerow([freq, c])
 
-    mean = statistics.mean(c_each)
-    dev = statistics.stdev(c_each)
+        mean = statistics.mean(c_each)
+        dev = statistics.stdev(c_each)
+
+        writer.writerow(['Mean', 'Dev'])
+        writer.writerow([mean, dev])
 
     fig = plt.figure()
     plt.plot(freq_list, c_each, '.')
@@ -92,4 +95,6 @@ if __name__ == '__main__':
     plt.title('C constant vs. Frequency')
     plt.ylabel('C constant')
     plt.xlabel('Frequency')
+    ticks = [freq_list[f] for f in range(len(freq_list)) if f % 2 == 0]
+    plt.xticks(ticks)
     plt.savefig('/Users/jakebuchanan/code/chladni/ReverseFit/output.png', dpi=300)

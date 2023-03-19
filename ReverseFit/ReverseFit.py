@@ -88,11 +88,13 @@ if __name__ == '__main__':
         writer.writerow([mean, dev])
 
     freq_list = [float(s) for s in freq_list]
+    xrange = (min(freq_list), max(freq_list))
+    xline = np.linspace(xrange[0],xrange[1],1000)
     fig = plt.figure()
     plt.plot(freq_list, c_each, '.')
-    plt.plot(freq_list, np.zeros(len(freq_list)) + mean, color='blue')
-    plt.plot(freq_list, np.zeros(len(freq_list)) + mean + dev, color='blue', linestyle='dotted')
-    plt.plot(freq_list, np.zeros(len(freq_list)) + mean - dev, color='blue', linestyle='dotted')
+    plt.plot(xline, np.zeros(len(xline)) + mean, color='blue')
+    plt.plot(freq_list, np.zeros(len(xline)) + mean + dev, color='blue', linestyle='dotted')
+    plt.plot(freq_list, np.zeros(len(xline)) + mean - dev, color='blue', linestyle='dotted')
     plt.title('C constant vs. Frequency')
     plt.ylabel('C constant')
     plt.xlabel('Frequency')

@@ -18,7 +18,7 @@ def read_image(filename, denoise=False):
     finally:
         gray = color.rgb2gray(rgb)
     thresh = threshold_mean(gray)
-    bool_array = gray > thresh
+    bool_array = gray > (thresh + (0.5*thresh))
     return bool_array * 1
 
 

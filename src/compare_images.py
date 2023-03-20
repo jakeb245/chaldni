@@ -45,7 +45,7 @@ def binary_to_transparent(image, color=None):
 
 
 if __name__ == '__main__':
-    exp_raw = io.imread('../data/figure_965..png')
+    exp_raw = io.imread('../data/figure_965.png')
     exp = rgba_to_binary(denoise_tv_chambolle(exp_raw, weight=0.2, channel_axis=-1))*1
     theo = rgb_to_binary(io.imread('TheoProto.png'))*1
 

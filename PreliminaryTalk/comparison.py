@@ -10,7 +10,7 @@ def get_filenames(freq):
 
 
 if __name__ == '__main__':
-    freq_list = [445, 2212, 3020, 3926, 1600, 582]
+    freq_list = [218.04,411,548,1089,1214,1940,3768,3926,4515]
 
     for freq in freq_list:
         exp, theo = get_filenames(freq)

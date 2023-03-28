@@ -64,6 +64,10 @@ if __name__ == '__main__':
     data_dir = "/Users/jakebuchanan/code/chladni/data"
     outfile = "/Users/jakebuchanan/code/chladni/ReverseFit/output.csv"
 
+    run = input("Are you sure you want to run ReverseFit.py? (y/n)")
+    if run != 'y':
+        raise SystemExit("Quitting")
+
     exp_images, freq_list = get_data(data_dir)
     img_list = get_model(theo_dir, freq_list)
 

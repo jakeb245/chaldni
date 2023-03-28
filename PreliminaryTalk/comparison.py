@@ -21,5 +21,5 @@ if __name__ == '__main__':
         fig = plt.figure()
         plt.axis('off')
         plt.imshow(added)
-        plt.savefig(f"/Users/jakebuchanan/code/chladni/PreliminaryTalk/{freq}_added.png", bbox_inches='tight',
-                    pad_inches=0, dpi=200)
+        plt.savefig(f"/Users/jakebuchanan/code/chladni/PreliminaryTalk/{freq}_added.jpeg", format='jpeg',
+                    bbox_inches='tight', pad_inches=0, dpi=200)
